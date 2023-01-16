@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Button from 'components/UI/Button/Button';
 import css from './ContactItem.module.css';
 
@@ -14,3 +15,12 @@ const ContactItem = ({ id, contact, remove }) => {
 };
 
 export default ContactItem;
+
+ContactItem.propTypes = {
+  remove: PropTypes.func.isRequired,
+  contact: PropTypes.exact({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string.isRequired,
+  }).isRequired,
+};

@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Input from 'components/UI/Input/Input';
 import css from './Filter.module.css';
 
@@ -11,3 +12,7 @@ const Filter = ({ filterContacts }) => {
 };
 
 export default Filter;
+
+Filter.propTypes = {
+  filterContacts: PropTypes.func.isRequired,
+};
