@@ -1,11 +1,13 @@
 import ContactItem from 'components/ContactItem/ContactItem';
 
-const ContactList = ({ contacts }) => {
+const ContactList = ({ contacts, remove }) => {
   return (
     <>
       <ul>
         {contacts.map(contact => {
-          return <ContactItem contact={contact} key={contact.id} />;
+          return (
+            <ContactItem remove={remove} contact={contact} key={contact.id} />
+          );
         })}
       </ul>
     </>

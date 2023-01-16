@@ -17,18 +17,23 @@ export class App extends Component {
 
   createContact = newContact => {
     for (const contact of this.state.contacts) {
-      if (contact.name === newContact.name)
+      if (contact.name === newContact.name) {
         alert(`${newContact.name} is already in contacts`);
-      return;
+        return;
+      }
     }
-
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
   };
 
+  removeContact = contact => {
+    this.setState({
+      contacts: this.state.contacts.filter(c => c.id !== contact.id),
+    });
+  };
+
   setFilter = filterQuery => {
-    // const filteredContacts = this.state.contacts;
     this.setState({
       contacts: this.state.contacts.filter(contact =>
         contact.name.toLowerCase().includes(filterQuery.toLowerCase())
@@ -43,7 +48,11 @@ export class App extends Component {
         <Form create={this.createContact} />
         <h2>Contacts</h2>
         <Filter filter={this.state.filter} setFilter={this.setFilter} />
-        <ContactList contacts={this.state.contacts} id={nanoid()} />
+        <ContactList
+          remove={this.removeContact}
+          contacts={this.state.contacts}
+          id={nanoid()}
+        />
       </>
     );
   }
