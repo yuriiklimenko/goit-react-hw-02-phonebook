@@ -1,11 +1,11 @@
 import Input from 'components/UI/Input/Input';
 import css from './Filter.module.css';
 
-const Filter = ({ setFilter }) => {
+const Filter = ({ filterContacts }) => {
   return (
     <div className={css.filterWrap}>
       <label className={css.label}>Find Contacts by name</label>
-      <Input onChange={e => setFilter(e.target.value)} />
+      <Input onChange={filterContacts} />
     </div>
   );
 };

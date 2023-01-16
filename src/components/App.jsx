@@ -15,56 +15,41 @@ export class App extends Component {
     filter: '',
   };
 
-  createContact = newContact => {
+  createContact = ({ name, number }) => {
     for (const contact of this.state.contacts) {
-      if (contact.name === newContact.name) {
-        alert(`${newContact.name} is already in contacts`);
-        return;
+      if (contact.name === name) {
+        return alert(`${name} is already in contacts`);
       }
     }
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, newContact],
+      contacts: [...prevState.contacts, { id: nanoid(), name, number }],
     }));
   };
 
-  removeContact = contact => {
-    this.setState({
-      contacts: this.state.contacts.filter(c => c.id !== contact.id),
-    });
+  removeContact = contactId => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(c => c.id !== contactId),
+    }));
   };
 
-  setFilter = filterQuery => {
-    if (filterQuery.length === 0) {
-      this.setState({
-        filter: [],
-      });
-      return;
-    }
-    this.setState({
-      filter: this.state.contacts.filter(contact =>
-        contact.name.toLowerCase().includes(filterQuery.toLowerCase())
-      ),
-    });
-  };
-
-  getFilter = () => {
-    if (this.state.filter.length === 0) {
-      return this.state.contacts;
-    }
-
-    return this.state.filter;
+  filterContacts = e => {
+    this.setState({ filter: e.currentTarget.value });
   };
 
   render() {
+    const filterContacts = this.state.contacts.filter(contact =>
+      contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
+    );
+
     return (
       <>
         <h1>Phonebook</h1>
         <Form create={this.createContact} />
         <h2>Contacts</h2>
-        <Filter setFilter={this.setFilter} />
+        <Filter filterContacts={this.filterContacts} />
         <ContactList
           remove={this.removeContact}
-          contacts={this.getFilter()}
+          contacts={filterContacts}
           id={nanoid()}
         />
       </>
