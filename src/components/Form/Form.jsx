@@ -20,7 +20,6 @@ class Form extends Component {
       ...this.state,
       id: nanoid(),
     };
-
     //3) закидуєм контакт в масив
     this.props.create(newContact);
 

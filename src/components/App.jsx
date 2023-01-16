@@ -16,6 +16,12 @@ export class App extends Component {
   };
 
   createContact = newContact => {
+    for (const contact of this.state.contacts) {
+      if (contact.name === newContact.name)
+        alert(`${newContact.name} is already in contacts`);
+      return;
+    }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, newContact],
     }));
