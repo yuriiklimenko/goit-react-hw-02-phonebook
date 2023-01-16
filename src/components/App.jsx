@@ -34,11 +34,25 @@ export class App extends Component {
   };
 
   setFilter = filterQuery => {
+    if (filterQuery.length === 0) {
+      this.setState({
+        filter: [],
+      });
+      return;
+    }
     this.setState({
-      contacts: this.state.contacts.filter(contact =>
+      filter: this.state.contacts.filter(contact =>
         contact.name.toLowerCase().includes(filterQuery.toLowerCase())
       ),
     });
+  };
+
+  getFilter = () => {
+    if (this.state.filter.length === 0) {
+      return this.state.contacts;
+    }
+
+    return this.state.filter;
   };
 
   render() {
@@ -47,10 +61,10 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <Form create={this.createContact} />
         <h2>Contacts</h2>
-        <Filter filter={this.state.filter} setFilter={this.setFilter} />
+        <Filter setFilter={this.setFilter} />
         <ContactList
           remove={this.removeContact}
-          contacts={this.state.contacts}
+          contacts={this.getFilter()}
           id={nanoid()}
         />
       </>
