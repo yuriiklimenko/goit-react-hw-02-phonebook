@@ -52,7 +52,7 @@ export class App extends Component {
         <h1>Phonebook</h1>
         <Form create={createContact} />
         <h2>Contacts</h2>
-        <Filter filterContacts={filterHandler} />
+        <Filter filterContacts={filterHandler} value={this.state.filter} />
         <ContactList remove={removeContact} contacts={filterContacts()} />
       </>
     );
