@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import Button from 'components/UI/Button/Button';
 import Input from 'components/UI/Input/Input';
@@ -5,6 +6,10 @@ import css from './Form.module.css';
 import InputTel from 'components/UI/Input/InputTel';
 
 class Form extends Component {
+  static propTypes = {
+    create: PropTypes.func.isRequired,
+  };
+
   state = {
     name: '',
     number: '',

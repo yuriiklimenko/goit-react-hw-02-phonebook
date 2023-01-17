@@ -35,26 +35,25 @@ export class App extends Component {
     }));
   };
 
-  filterContacts = e => {
+  filterHandler = e => {
     this.setState({ filter: e.currentTarget.value });
   };
 
-  render() {
-    const filterContacts = this.state.contacts.filter(contact =>
+  filterContacts = () =>
+    this.state.contacts.filter(contact =>
       contact.name.toLowerCase().includes(this.state.filter.toLowerCase())
     );
 
+  render() {
+    const { createContact, filterHandler, removeContact, filterContacts } =
+      this;
     return (
       <>
         <h1>Phonebook</h1>
-        <Form create={this.createContact} />
+        <Form create={createContact} />
         <h2>Contacts</h2>
-        <Filter filterContacts={this.filterContacts} />
-        <ContactList
-          remove={this.removeContact}
-          contacts={filterContacts}
-          id={nanoid()}
-        />
+        <Filter filterContacts={filterHandler} />
+        <ContactList remove={removeContact} contacts={filterContacts()} />
       </>
     );
   }

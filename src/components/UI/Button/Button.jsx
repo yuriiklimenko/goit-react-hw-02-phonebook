@@ -1,8 +1,8 @@
+import PropTypes from 'prop-types';
 import css from './Button.module.css';
 
 const Button = ({ children, ...props }) => {
   return (
-    //   ...props(щоб передавати в button все що захочемо)
     <button {...props} className={css.btn}>
       {children}
     </button>
@@ -10,3 +10,7 @@ const Button = ({ children, ...props }) => {
 };
 
 export default Button;
+
+Button.propTypes = {
+  children: PropTypes.node,
+};

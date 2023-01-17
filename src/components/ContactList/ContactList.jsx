@@ -7,7 +7,7 @@ const ContactList = ({ contacts, remove }) => {
       <ul>
         {contacts.map(contact => {
           return (
-            <ContactItem remove={remove} contact={contact} key={contact.id} />
+            <ContactItem remove={remove} contact={contact} key={contact.name} />
           );
         })}
       </ul>
