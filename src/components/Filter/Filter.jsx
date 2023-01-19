@@ -15,4 +15,5 @@ export default Filter;
 
 Filter.propTypes = {
   filterContacts: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };

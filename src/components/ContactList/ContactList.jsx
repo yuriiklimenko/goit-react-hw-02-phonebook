@@ -7,7 +7,7 @@ const ContactList = ({ contacts, remove }) => {
       <ul>
         {contacts.map(contact => {
           return (
-            <ContactItem remove={remove} contact={contact} key={contact.name} />
+            <ContactItem remove={remove} contact={contact} key={contact.id} />
           );
         })}
       </ul>
@@ -18,6 +18,10 @@ const ContactList = ({ contacts, remove }) => {
 export default ContactList;
 
 ContactList.propTypes = {
-  contacts: PropTypes.array.isRequired,
+  contacts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+    })
+  ).isRequired,
   remove: PropTypes.func.isRequired,
 };
